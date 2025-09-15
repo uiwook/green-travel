@@ -10,11 +10,11 @@ function FestivalList() {
 
   const festivalList = useSelector(state => state.festival.list);
   const page = useSelector(state => state.festival.page);
-  const scrollEventFlg = useSelector(state => state.fextival.scrollEventFlg);
+  const scrollEventFlg = useSelector(state => state.festival.scrollEventFlg);
 
   useEffect(() => {
     dispatch(festivalIndex(1));
-  })
+  }, []);
 
   // 스크롤 이벤트용 useEffect
   useEffect(() => {
