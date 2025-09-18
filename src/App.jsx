@@ -4,6 +4,7 @@ import Header from './conponents/common/Header.jsx';
 import { useEffect } from 'react';
 import { localStorageUtil } from './utils/localStorageUtil.js';
 import { dateFormatter } from './utils/dateFormatter.js';
+import BeforeInstallPrompt from './conponents/BeforeInstallPrompt.jsx';
 
 function App() {
   useEffect(() => {
@@ -24,6 +25,7 @@ function App() {
     }, [])
   return (
     <>
+      <BeforeInstallPrompt />
       <Header></Header>
       <main>
         <Outlet />
