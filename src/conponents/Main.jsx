@@ -6,8 +6,20 @@ function Main() {
 
   return (
     <>
-      <img className='title-img' src={'/base/Sungnyemun.jpg'} alt="대문" 
-      onClick={() => {navigate('/festivals')}}/>
+    <div className="container">
+
+      <div className='door'>
+        <img className='title-img' src={'/base/Sungnyemun.jpg'} alt="대문" 
+        onClick={() => {navigate('/festivals')}}/>
+        <p className="text">여행 정보</p>
+      </div>
+      <div className='door'>
+        <img className='title-img' src={'/base/stayImage.png'} alt="대문" 
+        onClick={() => {navigate('/lodgment')}}/>
+        <p className="text">숙박업소 정보</p>
+      </div>
+    
+    </div>
     </>
   )
 }

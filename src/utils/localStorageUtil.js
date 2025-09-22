@@ -1,4 +1,5 @@
-import { KEY_LOCALSTORAGE_CLEAR_DATE, KEY_LOCALSTORAGE_FESTIVAL_FLG, KEY_LOCALSTORAGE_FESTIVAL_LIST, KEY_LOCALSTORAGE_FESTIVAL_PAGE } from "../configs/keys.js";
+import { KEY_LOCALSTORAGE_CLEAR_DATE, KEY_LOCALSTORAGE_FESTIVAL_FLG, KEY_LOCALSTORAGE_FESTIVAL_LIST, KEY_LOCALSTORAGE_FESTIVAL_PAGE, 
+  KEY_LOCALSTORAGE_STAY_LIST, KEY_LOCALSTORAGE_STAY_PAGE, KEY_LOCALSTORAGE_STAY_FLG, } from "../configs/keys.js";
 
 export const localStorageUtil = {
   // 책임중심적 설계시 코드 작성 방법
@@ -69,4 +70,33 @@ export const localStorageUtil = {
   // getLocalStorage: (key) => {
   //   return localStorage.getItem(key);
   // },
+}
+
+export const stayUtil = {
+  setStayList: (stayData) => {
+    localStorage.setItem(KEY_LOCALSTORAGE_STAY_LIST, JSON.stringify(stayData));
+  },
+
+  getStayList: () => {
+    return JSON.parse(localStorage.getItem(KEY_LOCALSTORAGE_STAY_LIST));
+  },
+  
+  setStayPage: (stayPageNo) => {
+    localStorage.setItem(KEY_LOCALSTORAGE_STAY_PAGE, JSON.stringify(stayPageNo));
+  },
+  
+ getStayPage: () => {
+   return parseInt(localStorage.getItem(KEY_LOCALSTORAGE_STAY_PAGE));
+  },
+  
+  setStayScrollFlg: (stayFlg) => {
+    localStorage.setItem(KEY_LOCALSTORAGE_STAY_FLG, JSON.stringify(stayFlg));
+  },
+  /**
+   * 로컬스토리지에 페스티벌 스크롤 플래그 반환
+   * @returns {boolean} flg
+   */
+  getStayScrollFlg: () => {
+   return JSON.parse(localStorage.getItem(KEY_LOCALSTORAGE_STAY_FLG));
+  },
 }

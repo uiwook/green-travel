@@ -46,8 +46,13 @@ function FestivalList() {
       navigate(`/festivals/${item.contentid}`);
     }
 
+  function back() {
+  navigate(-1);
+  }
+
   return (
     <>
+      <button className='back-btn' onClick={back}>◁</button>
       <div className="container">
         {
           // festivalList && festivalList.map((item) => {
