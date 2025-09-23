@@ -13,11 +13,11 @@
   justify-content: space-between;
   gap: 20px;
   text-align: center;
-  padding: 10px;
+  /* padding: 10px; */
 }
 
 .stay-card-img {
-  /* padding-top: 70%; */
+  padding-top: 70%;
   background-repeat: no-repeat;
   background-size: cover;
 

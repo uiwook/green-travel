@@ -4,13 +4,13 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  color: #fff;
+  color: #000;
 }
 
 .stay-show-title {
   font-size: 40px;
   font-weight: 900;
-  color: rgb(110, 220, 240);
+  color: #000;
 }
 
 .stay-show-adress {

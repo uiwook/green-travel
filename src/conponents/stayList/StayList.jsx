@@ -52,7 +52,7 @@ function StayList() {
           stayList && stayList.map((item2) => {
             return(
         <div className="stay-card" onClick={() => {redirectShow(item2)}} key={item2.contentid}>
-          <img src={item2.firstimage} className='stay-card-img' alt="숙박업소" />
+          <div className="stay-card-img" style={{backgroundImage: `url('${item2.firstimage}')`}}></div>
           <p className='stay-card-title'>{item2.title}</p>
           <p className='stay-card-adress'>{item2.addr1}</p>
         </div>

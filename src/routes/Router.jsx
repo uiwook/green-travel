@@ -5,6 +5,7 @@ import FestivalList from "../conponents/festivals/FestivalList.jsx";
 import FestivalShow from "../conponents/festivals/FestivalShow.jsx";
 import StayList from "../conponents/stayList/StayList.jsx";
 import StayShow from "../conponents/stayList/StayShow.jsx";
+import Test from "../conponents/festivals/Test.jsx"
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
         path: '/lodgment/:id',
         element: <StayShow />,
       },
+      {
+        path: '/test',
+        element: <Test />
+      }
     ],
   }
 ]);

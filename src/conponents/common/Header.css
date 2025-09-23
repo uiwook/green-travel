@@ -1,6 +1,10 @@
 h1 {
-    color: white;
+    color: #535353;
     font-size: 60px;
     text-align: center;
     padding: 57px 0;
+  }
+
+h1:hover {
+  cursor: pointer;
 }

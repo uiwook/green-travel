@@ -5,10 +5,13 @@
 }
 
 body {
-  background-color: #000;
+  background-color: #CADCAE;
 }
 
 #root {
   max-width: 1000px;
+  height: 100%;
+  min-height: 100vh;
   margin: 0 auto;
+  background-color: #E1E9C9;
 }
