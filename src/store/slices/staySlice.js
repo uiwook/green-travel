@@ -1,19 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { stayIndex } from "../thunks/stayThunk";
-import { stayUtil } from "../../utils/localStorageUtil"
+// import { stayUtil } from "../../utils/localStorageUtil"
 
 
 const staySlice = createSlice({
   name: 'staySlice',
   initialState: {
-    stayList: stayUtil.getStayList() ? stayUtil.getStayList() : [],
-    stayPage: stayUtil.getStayPage() ? stayUtil.getStayPage() : 0,
-    scrollEventFlg: stayUtil.getStayScrollFlg() ? stayUtil.getStayScrollFlg() : true,
+    stayList: [],
+    stayPage: 0,
+    scrollEventFlg: true,
+    // 네비게이션 바 없을때의 처리
+    // stayList: stayUtil.getStayList() ? stayUtil.getStayList() : [],
+    // stayPage: stayUtil.getStayPage() ? stayUtil.getStayPage() : 0,
+    // scrollEventFlg: stayUtil.getStayScrollFlg() ? stayUtil.getStayScrollFlg() : true,
   },
   reducers: {
     setScrollEventFlg: (state, action) => {
       state.scrollEventFlg = action.payload;
-    }
+    },
+    resetStayList: (state) => {
+      state.stayList = [];
+      state.stayPage = 0;
+      state.scrollEventFlg = true;
+    },
   },
   extraReducers: builder => {
     builder
@@ -22,9 +31,10 @@ const staySlice = createSlice({
           state.stayList = [...state.stayList, ...action.payload.items.item];
           state.stayPage = action.payload.pageNo;
         
-          stayUtil.setStayList(state.stayList);
-          stayUtil.setStayPage(state.stayPage);
-          stayUtil.setStayScrollFlg(state.scrollEventFlg);        
+          // 네이게이션 바 없을때의 처리
+          // stayUtil.setStayList(state.stayList);
+          // stayUtil.setStayPage(state.stayPage);
+          // stayUtil.setStayScrollFlg(state.scrollEventFlg);        
         } else {
           state.scrollEventFlg = false;
         }
@@ -39,6 +49,6 @@ const staySlice = createSlice({
   }
 })
 
-export const { setScrollEventFlg } = staySlice.actions;
+export const { setScrollEventFlg, resetStayList, } = staySlice.actions;
 
 export default staySlice.reducer;

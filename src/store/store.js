@@ -3,6 +3,7 @@ import festivalReducer from './slices/festivalSlice.js'
 import festivalShowReducer from './slices/festivalShowSlice.js';
 import stayReducer from './slices/staySlice.js';
 import stayShowReducer from './slices/stayShowSlice.js'
+import codeReducer from './slices/codeSlice.js'
 
 export default configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export default configureStore({
     festivalShow: festivalShowReducer,
     stay: stayReducer,
     stayShow: stayShowReducer,
+    code: codeReducer,
   }
 })

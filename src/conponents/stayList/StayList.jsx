@@ -2,8 +2,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import './StayList.css'
 import { useNavigate } from 'react-router-dom';
 import { stayIndex } from '../../store/thunks/stayThunk';
-import { useEffect } from 'react';
-import { setScrollEventFlg } from '../../store/slices/staySlice';
+import { useCallback, useEffect, useState } from 'react';
+import { setScrollEventFlg, resetStayList } from '../../store/slices/staySlice';
+import { codeIndex } from '../../store/thunks/codeThunk';
 
 function StayList() {
   const dispatch = useDispatch();
@@ -11,19 +12,36 @@ function StayList() {
 
   const stayList = useSelector(state => state.stay.stayList);
   const scrollEventFlg = useSelector(state => state.stay.scrollEventFlg);
+  const page = useSelector(state => state.stay.page);
+  const codeList = useSelector(state => state.code.areaCode);
+
+  const [selectedAreaCode, setSelectedAreaCode] = useState('');
+
+  const filterStayList = selectedAreaCode ? stayList.filter(
+    stay => stay.areacode === selectedAreaCode) : stayList;
 
   useEffect(() => {
     if (stayList.length === 0) {
       dispatch(stayIndex());
     }
-    
     window.addEventListener('scroll', addNextpage);
     return () => {
       window.removeEventListener('scroll', addNextpage);
     }
   }, []);
 
-  function addNextpage() {
+  useEffect(() => {
+    dispatch(resetStayList());
+    dispatch(stayIndex({areacode: selectedAreaCode, pageNo: 1}))
+  }, [dispatch, selectedAreaCode])
+
+    useEffect(() => {
+    if(codeList.length === 0) {
+      dispatch(codeIndex());
+    }
+  }, [dispatch, codeList.length]); 
+
+  const addNextpage = useCallback(() => {
     // 스크롤 관련 처리
     const docHeight = document.documentElement.scrollHeight; // 문서의 Y축 총 길이
     const winHeight = window.innerHeight; // 윈도우의 Y축 총 길이
@@ -32,9 +50,9 @@ function StayList() {
 
     if(viewHeight === nowHeight && scrollEventFlg) {
       dispatch(setScrollEventFlg(false));
-      dispatch(stayIndex());
+      dispatch(stayIndex({ areacode: selectedAreaCode, pageNo: page +1}));
     }
-  }
+  }, [dispatch, selectedAreaCode, page, scrollEventFlg])
 
   function back() {
     navigate(-1);
@@ -44,12 +62,31 @@ function StayList() {
     navigate(`/lodgment/${item2.contentid}`);
   }
 
+
+
   return (
     <>
       <button className='back-btn' onClick={back}>◁</button>
+      <div className="stay-navigate-btn">
+        <button type="button" key="all" onClick={() => {setSelectedAreaCode('')}}>
+          전체
+        </button>
+        {
+          codeList && codeList.map((item) => {
+            return (
+              <>
+                <button type="button" key={item.code} 
+                onClick={() => {setSelectedAreaCode(item.code)}}>
+                  {item.name}
+                  </button>
+              </>
+            )
+          })       
+        }
+      </div>
       <div className="stay-container">
         {
-          stayList && stayList.map((item2) => {
+          filterStayList && filterStayList.map((item2) => {
             return(
         <div className="stay-card" onClick={() => {redirectShow(item2)}} key={item2.contentid}>
           <div className="stay-card-img" style={{backgroundImage: `url('${item2.firstimage}')`}}></div>

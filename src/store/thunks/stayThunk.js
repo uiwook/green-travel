@@ -4,9 +4,10 @@ import axios from "axios";
 
 const stayIndex = createAsyncThunk(
   'staySlice/stayIndex',
-  async (arg, thunkAPI) => {
-    const state = thunkAPI.getState();
-
+  // async (arg, thunkAPI) => {
+    // const state = thunkAPI.getState();
+    
+  async ({ areacode = '', pageNo = 1 }) => {
     const url = `${axiosConfig.BASE_URL}/searchStay2`;
 
     const config = {
@@ -17,7 +18,10 @@ const stayIndex = createAsyncThunk(
       _type: axiosConfig.TYPE,
       arrange: axiosConfig.ARRANGE,
       numOfRows: axiosConfig.NUM_OF_ROWS,
-      pageNo: state.stay.stayPage + 1,
+      pageNo: pageNo,
+      // 네비게이션 바 없을때의 처리
+      //pageNo: state.stay.stayPage + 1,
+      ...(areacode && { areaCode: areacode }),
     }
   }
 

@@ -1,18 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { festivalIndex } from "../thunks/festivalThunk";
-import { localStorageUtil } from "../../utils/localStorageUtil";
+// import { localStorageUtil } from "../../utils/localStorageUtil";
 
 const festivalSlice = createSlice({
   name: 'festivalSlice',
   initialState: {
-    // list: null, // 페스티벌 리스트
-    list: localStorageUtil.getFestivalList() ? localStorageUtil.getFestivalList() : [], // 페스티벌 리스트
-    page: localStorageUtil.getFestivalPage() ? localStorageUtil.getFestivalPage() : 0, // 현재 페이지 번호
-    scrollEventFlg: localStorageUtil.getFestivalScrollFlg() ? localStorageUtil.getFestivalScrollFlg() : true, // 스크롤 이벤트 디바운싱 제어 플래그
+    // 서버에 통신을 보내는 처리(네비게이션 바를 이용)
+    list: [], // 페스티벌 리스트
+    page: 0,
+    scrollEventFlg: true,
+    // localStorage에서 불러와서 DB에 요청을 아끼는 처리
+    // list: localStorageUtil.getFestivalList() ? localStorageUtil.getFestivalList() : [], // 페스티벌 리스트
+    // page: localStorageUtil.getFestivalPage() ? localStorageUtil.getFestivalPage() : 0, // 현재 페이지 번호
+    // scrollEventFlg: localStorageUtil.getFestivalScrollFlg() ? localStorageUtil.getFestivalScrollFlg() : true, // 스크롤 이벤트 디바운싱 제어 플래그
   },
   reducers: {
     setScrollEventFlg: (state, action) => {
       state.scrollEventFlg = action.payload;
+    },
+    resetFestivalList: (state) => {
+      state.list = [];
+      state.page = 0;
+      state.scrollEventFlg = true;
+      // localStorage에 정보 등록하는 처리
+      // localStorageUtil.setFestivalList([]);
+      // localStorageUtil.setFestivalPage(0);
+      // localStorageUtil.setFestivalScrollFlg(true);
     }
   },
   extraReducers: builder => {
@@ -34,9 +47,9 @@ const festivalSlice = createSlice({
           state.scrollEventFlg = true;
 
           // localstorage 재할당(저장)
-          localStorageUtil.setFestivalList(state.list);
-          localStorageUtil.setFestivalPage(state.page);
-          localStorageUtil.setFestivalScrollFlg(state.scrollEventFlg);
+          // localStorageUtil.setFestivalList(state.list);
+          // localStorageUtil.setFestivalPage(state.page);
+          // localStorageUtil.setFestivalScrollFlg(state.scrollEventFlg);
         } else {
           state.scrollEventFlg = false;
         }
@@ -52,7 +65,8 @@ const festivalSlice = createSlice({
 })
 
 export const {
-  setScrollEventFlg
+  setScrollEventFlg,
+  resetFestivalList,
 } = festivalSlice.actions;
 
 export default festivalSlice.reducer;

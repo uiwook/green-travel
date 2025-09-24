@@ -6,9 +6,7 @@ import { dateFormatter } from "../../utils/dateFormatter.js";
 
 const festivalIndex = createAsyncThunk(
   'festivalSlice/festivalIndex',
-  async (arg, thunkAPI) => {
-    // state 접근 방법
-    const state = thunkAPI.getState();
+  async ({ areacode = '', pageNo = 1 }) => {
     const pastDateYMD = dateFormatter.formatDateToYMD(dateCalculater.getPastDate((1000*60*60*24*30)));
 
     const url = `${axiosConfig.BASE_URL}/searchFestival2`;
@@ -20,8 +18,11 @@ const festivalIndex = createAsyncThunk(
       _type: axiosConfig.TYPE,
       arrange: axiosConfig.ARRANGE,
       numOfRows: axiosConfig.NUM_OF_ROWS,
-      pageNo: state.festival.page + 1,
+      pageNo: pageNo,
+      // 네비게이션 바 없을때의 처리
+      // pageNo: state.stay.stayPage + 1,
       eventStartDate: pastDateYMD,
+      ...(areacode && { areaCode: areacode }),
     }
   }
 
