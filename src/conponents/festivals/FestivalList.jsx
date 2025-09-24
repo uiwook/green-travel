@@ -73,14 +73,12 @@ function FestivalList() {
           전체
         </button>
         {
-          codeList && codeList.map((item) => {
+          codeList && codeList.map((item, index) => {
             return (
-              <>
-                <button type="button" key={item.code} 
+                <button type="button" key={item.code + index} 
                 onClick={() => {setSelectedAreaCode(item.code)}}>
                   {item.name}
                   </button>
-              </>
             )
           })
         }
@@ -88,9 +86,9 @@ function FestivalList() {
       <div className="container">
         {
           // festivalList && festivalList.map((item) => {
-          filterFestivalList && filterFestivalList.map((item) => {
+          filterFestivalList && filterFestivalList.map((item, index) => {
             return (
-        <div className="card" onClick={() => {redirectShow(item)}} key={item.contentid} >
+        <div className="card" onClick={() => {redirectShow(item)}} key={item.contentid + index} >
           <div className="card-img" style={{backgroundImage: `url('${item.firstimage}')`}}></div>
           <p className="card-title">{item.title}</p>
           <p className="card-period">{dateFormatter.withHyphenYMD(item.eventstartdate)} ~ {dateFormatter.withHyphenYMD(item.eventenddate)}</p>

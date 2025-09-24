@@ -21,9 +21,6 @@ function StayList() {
     stay => stay.areacode === selectedAreaCode) : stayList;
 
   useEffect(() => {
-    if (stayList.length === 0) {
-      dispatch(stayIndex());
-    }
     window.addEventListener('scroll', addNextpage);
     return () => {
       window.removeEventListener('scroll', addNextpage);
@@ -72,23 +69,21 @@ function StayList() {
           전체
         </button>
         {
-          codeList && codeList.map((item) => {
+          codeList && codeList.map((item, index) => {
             return (
-              <>
-                <button type="button" key={item.code} 
+                <button type="button" key={item.code + index} 
                 onClick={() => {setSelectedAreaCode(item.code)}}>
                   {item.name}
                   </button>
-              </>
             )
           })       
         }
       </div>
       <div className="stay-container">
         {
-          filterStayList && filterStayList.map((item2) => {
+          filterStayList && filterStayList.map((item2, index) => {
             return(
-        <div className="stay-card" onClick={() => {redirectShow(item2)}} key={item2.contentid}>
+        <div className="stay-card" onClick={() => {redirectShow(item2)}} key={item2.contentid + index}>
           <div className="stay-card-img" style={{backgroundImage: `url('${item2.firstimage}')`}}></div>
           <p className='stay-card-title'>{item2.title}</p>
           <p className='stay-card-adress'>{item2.addr1}</p>

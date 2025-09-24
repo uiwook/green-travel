@@ -6,7 +6,7 @@ function Main() {
 
   return (
     <>
-    <div className="container">
+    <div className="main-container">
 
       <div className='door'>
         <img className='title-img' src={'/base/bus.png'} alt="행사" 
