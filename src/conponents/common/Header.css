@@ -1,6 +1,6 @@
 h1 {
     color: #535353;
-    font-size: 60px;
+    font-size: calc(4rem - 5px);
     text-align: center;
     padding: 57px 0;
   }
