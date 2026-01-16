@@ -1,12 +1,22 @@
-# React + Vite
+npm i react-router-dom @reduxjs/toolkit react-redux redux-thunk axios
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+** PWA 적용 **
 
-Currently, two official plugins are available:
+설치
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+npm i -D vite-plugin-pwa
+Manifest 설정
 
-## Expanding the ESLint configuration
+vite.config.js에 PWA Manifest 설정을 추가
+아이콘 이미지는 아래의 사이즈 별로 필요
+180x180(IOS), 192X192(web | Android), 512X512(web | Android)
+서비스 워커 작성
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+src/sw.js, src/swRegister.js 파일 생성
+src/main.jsx에 서비스 워커 레지스터 추가
+
+index.html에 meta데이터 설정(IOS 대응 및 Manifest 기본 설정)
+
+위 설정 완료 후 빌드 npm run build
+
+빌드한 것으로 동작하는 내장서버 실행 npm run preview
